@@ -1,0 +1,22 @@
+---
+import chapeau_lapin from "../assets/chapeau_lapin.png";
+import fleche from "../assets/arrow-right_icon.png";
+
+import "../styles/input.css";
+---
+
+<div id="container" class="min-h-screen flex flex-col md:flex-row justify-center items-center bg-gradient-to-br from-blue-50 to-blue-100 p-8">
+    <div class="text-center md:text-left mb-8 md:mb-0 md:mr-12">
+        <h1 class="text-5xl md:text-7xl font-bold text-gray-800 mb-4">Johan Vadenne</h1>
+        <h2 class="text-4xl md:text-6xl text-gray-600 mb-8">Bienvenue sur mon Portfolio</h2>
+        <div class="mt-6">
+            <a href="qui_je_suis" class="inline-flex items-center justify-center px-8 py-3 text-xl font-semibold text-white bg-blue-500 rounded-full hover:bg-blue-600 transition duration-300">
+                Voir mon portfolio
+                <img class="h-6 ml-3" src={fleche.src} alt="Flèche droite">
+            </a>
+        </div>
+    </div>
+    <div class="mt-8 md:mt-0">
+        <img src={chapeau_lapin.src} alt="Chapeau Lapin" class="w-64 md:w-96 rounded-lg">
+    </div>
+</div>
