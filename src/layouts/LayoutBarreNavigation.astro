@@ -1,6 +1,6 @@
 ---
 import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import Skill from "../components/Skill.astro";
 import Head from "../components/Head.astro";
 import "../styles/input.css";
 
@@ -13,8 +13,11 @@ const title = Astro.props.title;
     <body class="h-screen">
         <!-- Barre de navigation à gauche -->
         <Navbar title={title} />
-		<main class="flex justify-center w-full">
+		<main class="flex w-full">
+            <div class="w-2/12"></div>
 			<slot />
+            <Skill />
 		</main>
+        
     </body>
 </html>
