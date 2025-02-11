@@ -1,0 +1,73 @@
+---
+import axios from "axios"; // Pour faire des requêtes HTTP
+import logoGit from "../assets/logo-github.png";
+
+// Récupérer les dépôts publics de votre compte GitHub
+const apiUrl = `https://api.github.com/users/johanvadenne/repos`;
+const token = import.meta.env.GITHUB_TOKEN;
+
+const config = {
+  headers: {
+    Authorization: `token ${token}`,
+  },
+};
+
+// Récupérer les dépôts publics
+let repos = [];
+try {
+  const response = await axios.get(apiUrl, config);
+  repos = response.data;
+} catch (error) {
+  console.error("Erreur lors de la récupération des dépôts GitHub :", error);
+}
+---
+
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-8 w-8/12">
+  <div class="flex items-center">
+    <img class="m-1 h-20" src={logoGit.src} alt="logo github" />
+    <h1 class="text-6xl font-bold pb-4">projets GitHub</h1>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
+    {
+      repos.map(
+        (repo: {
+          html_url: string | URL | null | undefined;
+          name: unknown;
+          description: any;
+          stargazers_count: unknown;
+          forks_count: unknown;
+          language: any;
+          topics: any;
+        }) => (
+          <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300 h-full items-center">
+              <h2 class="text-xl font-bold text-blue-600 mb-2">
+                  {repo.name}
+              </h2>
+              <p class="text-gray-700 mb-4">
+                {repo.description || "Pas de description"}
+              </p>
+              <div class="space-x-4 text-sm text-gray-600">
+                {/* <span>⭐ {repo.stargazers_count}</span> */}
+                <div class="m-4">
+                  <span>langage: </span>
+                  <span class="bg-yellow-200 text-yellow-600 px-2 py-1 rounded-full">
+                    {repo.language || "Non spécifié"}
+                  </span>
+                </div>
+                <div class="m-4 flex flex-wrap">
+                  <span>tags: </span>
+                  {repo.topics.map((topic: string) => (
+                    <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded-full m-1">
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </a>
+        )
+      )
+    }
+  </div>
+</div>

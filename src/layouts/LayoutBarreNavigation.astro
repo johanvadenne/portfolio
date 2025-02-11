@@ -2,6 +2,9 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import Head from "../components/Head.astro";
+import "../styles/input.css";
+
+const title = Astro.props.title;
 ---
 
 <!doctype html>
@@ -9,7 +12,7 @@ import Head from "../components/Head.astro";
     <Head />
     <body class="h-screen">
         <!-- Barre de navigation à gauche -->
-        <Navbar />
+        <Navbar title={title} />
 		<main class="flex justify-center w-full">
 			<slot />
 		</main>
