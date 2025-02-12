@@ -18,6 +18,9 @@ const title = Astro.props.title;
     </svg>
 </button>
 
+<!-- Overlay pour mobile -->
+<div id="overlay" class="fixed inset-0 bg-opacity-50 z-40 hidden lg:hidden"></div>
+
 <!-- Barre de navigation -->
 <nav id="sidebar" class="fixed left-0 top-0 h-screen lg:w-2/12 w-64 bg-blue-400 text-white p-6 flex flex-col space-y-6 shadow-2xl transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
     <!-- Logo ou nom -->
@@ -99,10 +102,23 @@ const title = Astro.props.title;
 
 <!-- Script pour gérer l'ouverture/fermeture de la sidebar -->
 <script is:inline>
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle') ;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const overlay = document.getElementById('overlay');
 
-    sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('translate-x-0');
+        if (sidebar && sidebarToggle && overlay) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('translate-x-0');
+                overlay.classList.toggle('hidden');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('translate-x-0');
+                overlay.classList.add('hidden');
+            });
+        }
     });
+    
 </script>
