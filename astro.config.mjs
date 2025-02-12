@@ -4,5 +4,4 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({ 
     vite: { plugins: [tailwindcss()], },
-    outDir: '../postfolio-prod', 
 });
